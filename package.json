@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "swagger-jsdoc": "^6.2.8"
+  },
+  "devDependencies": {
+    "@types/swagger-jsdoc": "^6.0.1"
+  }
+}
