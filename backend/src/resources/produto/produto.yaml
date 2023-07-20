@@ -1,0 +1,178 @@
+tags:
+  name: Produto
+  description: Endpoints da entidade Produto
+
+paths:
+  /produto:
+    get:
+      summary: Retorna todos os produtos cadastrados
+      tags: [Produto]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Produto"
+    post:
+      summary: Cria um novo produto
+      tags: [Produto]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProdutoDto"
+        required: true
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+
+  /produto/{id}:
+    get:
+      summary: Retorna os dados de um produto
+      tags: [Produto]
+      parameters:
+        - name: id
+          in: path
+          description: ID do produto (UUID)
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        "400":
+          description: Produto não existe.
+          content:
+            application/json:
+              schema:
+                type: object
+                example: { msg: "Produto não existe" }
+
+    put:
+      summary: Modifica os dados de um dado produto
+      tags: [Produto]
+      parameters:
+        - name: id
+          in: path
+          description: ID do produto (UUID)
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProdutoDto"
+        required: true
+      responses:
+        "200":
+          description: Produto atualizado.
+          content:
+            application/json:
+              schema:
+                type: object
+                example: { msg: "Produto atualizado." }
+        "400":
+          description: O produto não existe.
+          content:
+            application/json:
+              schema:
+                type: object
+                example: { msg: "Produto não existe." }
+    delete:
+      summary: Apaga um produto cadastrado.
+      tags: [Produto]
+      parameters:
+        - name: id
+          in: path
+          description: ID do produto (UUID)
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Produto apagado.
+          content:
+            application/json:
+              schema:
+                type: object
+                example: { msg: "Produto apagado." }
+        "400":
+          description: O produto não existe.
+          content:
+            application/json:
+              schema:
+                type: object
+                example: { msg: "Produto não existe." }
+
+
+components:
+  schemas:
+    Produto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID do produto no formato UUID.
+          example: appebc43-1111-4a9c-b321-1238b5f536f4
+        nome:
+          type: string
+          description: Nome do produto.
+          example: Celular Google Pixel
+        preco:
+          type: float
+          description: Preço.
+          example: 1500.99
+        estoque:
+          type: integer
+          description: Número de itens no estoque.
+          example: 200
+        createdAt:
+          type: date
+          description: Data de criação do item no banco de dados.
+          example: '2023-11-31T23:59:59Z'
+        updatedAt:
+          type: date
+          description: Data de atualização do item no banco de dados.
+          example: '2023-02-01T12:00:00Z'
+    CreateProdutoDto:
+      type: object
+      properties:
+        nome:
+          type: string
+          description: Nome do produto.
+          example: Celular Motorola
+        preco:
+          type: float
+          description: Preço.
+          example: 1499.99
+        estoque:
+          type: integer
+          description: Número de itens no estoque.
+          example: 20
+    UpdateProdutoDto:
+      type: object
+      properties:
+        nome:
+          type: string
+          description: Nome do produto.
+          example: Notebook Sansung
+        preco:
+          type: float
+          description: Preço.
+          example: 5499.99
+        estoque:
+          type: integer
+          description: Número de itens no estoque.
+          example: 40

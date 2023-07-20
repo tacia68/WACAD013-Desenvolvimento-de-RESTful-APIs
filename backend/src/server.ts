@@ -17,6 +17,9 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { v4 as uuidv4 } from 'uuid';
 
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpecs from './swagger';
+
 const models = [VersaoDB, Usuario, TipoUsuario, Produto, Compra, CompraItem];
 
 declare module 'express-session' {
@@ -62,6 +65,7 @@ export class Api {
       }),
     );
     this.server.use(logger('completo'));
+    this.server.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
   }
 
   private async router() {

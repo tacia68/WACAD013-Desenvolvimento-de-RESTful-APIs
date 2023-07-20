@@ -1,0 +1,39 @@
+tags:
+  name: TipoUsuario
+  description: Os tipos de Usuario (cliente, admin)
+
+paths:
+  /tipo-usuario:
+    get:
+      summary: Retorna os tipos de usuários
+      tags: [TipoUsuario]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TipoUsuarioDto"
+components:
+  schemas:
+    TipoUsuarioDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID do usuário no formato UUID.
+          example: 12345920-18e9-69fe-c7b1-01bbb27710d1
+        rotulo:
+          type: string
+          description: Rótulo do tipo de usuário.
+          example: Cliente Bom
+        createdAt:
+          type: date
+          description: Data de criação do usuário no banco de dados.
+          example: 2023-06-11T13:02:27.000Z
+        updatedAt:
+          type: date
+          description: Data de atualização do usuário no banco de dados.
+          example: 2023-08-11T13:02:27.000Z
